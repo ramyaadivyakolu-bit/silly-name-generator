@@ -19,24 +19,25 @@ def asking_choice():
         word=random.choice(words)
     return total_guesses,word
 
-def valid_input(guessing_word,total_guesses):
+def valid_input(guessing_word,total_guesses,word):
     char=input(f"enter the character you would think it is in word")
     if(len(char)==1 and char.isalpha()):
-            if(char in guessing_word):
-                 print()
+            if(char in word):
+                 guessing_word=guessing_word+char
             else:
                  guessing_word=guessing_word+char
                  total_guesses-=1
     else:
             print("you need to enter single character only")
-    return guessing_word,total_guesses
+    return guessing_word,total_guesses,word
 
 
 total_guesses,word=asking_choice()
 print("guess characters of word")
 guessing_word=""
 while(total_guesses>0):
-     guessing_word,total_guesses=valid_input(guessing_word,total_guesses)
+     guessing_word,total_guesses,word=valid_input(guessing_word,total_guesses,word)
+     print(f"letters used this far : {','.join(guessing_word)}")
      for char in word:
         if char in guessing_word:
              print(char,end=" ")
